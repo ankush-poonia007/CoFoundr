@@ -23,3 +23,5 @@ node_modules/
 
 # DB
 *.sqlite3
+
+cofoundr_roadmap.md
