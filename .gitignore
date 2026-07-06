@@ -2,26 +2,56 @@
 __pycache__/
 *.pyc
 *.pyo
-.env
-*.egg-info/
-dist/
+*.pyd
+.Python
+env/
+venv/
+.venv/
+ENV/
 build/
+dist/
+*.egg-info/
 .pytest_cache/
 htmlcov/
+.coverage
+.cache/
 
-# Node
+# Node (Next.js)
 node_modules/
 .next/
+out/
+build/
+
+# Secret Files
+.env
 .env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
 
-# Docker
-*.log
+# Database Data Volumes
+postgres_data/
+chroma_data/
+*.sqlite3
+*.db
+*.sqlite
 
-# IDE
+# IDE & Editor Configs
 .vscode/
 .idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+.project
+.pydevproject
 
-# DB
-*.sqlite3
+# Operating System Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
 
+# Documentation Roadmaps
 cofoundr_roadmap.md
