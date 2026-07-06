@@ -22,7 +22,7 @@ class GeminiProvider(BaseProvider):
     """Google Gemini LLM and Embedding API Provider."""
 
     def __init__(self):
-        genai.configure(api_key=settings.GEMINI_API_KEY)
+        genai.configure(api_key=settings.GEMINI_API_KEY or "mock_key")
         self.model_name = GEMINI_FLASH_MODEL
         self.embed_model_name = GEMINI_EMBEDDING_MODEL
 

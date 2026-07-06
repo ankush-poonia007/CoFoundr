@@ -9,8 +9,9 @@
 import logging
 import uuid
 from typing import List
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, HTTPException, UploadFile, File
 from sqlalchemy.ext.asyncio import AsyncSession
+from app.tools import parse_file, index_document
 
 from app.db.session import get_db
 from app.api.deps import get_current_user_id
@@ -74,3 +75,42 @@ async def analyze_startup(
     """Run the YC partner recommendations workflow, computing metrics and compiling audits."""
     logger.info(f"Triggering strategic analysis for startup: {id} for user: {user_id}")
     return await StartupService(db).analyze_startup(id, user_id)
+
+
+@router.post("/{id}/documents")
+async def upload_document(
+    id: uuid.UUID,
+    file: UploadFile = File(...),
+    user_id: uuid.UUID = Depends(get_current_user_id),
+    db: AsyncSession = Depends(get_db),
+):
+    """Upload and vector-index a document for a specific startup profile."""
+    logger.info(f"Uploading file {file.filename} for startup: {id}")
+    # 1. Verify startup ownership
+    startup_service = StartupService(db)
+    startup = await startup_service.startup_repo.get(id)
+    if not startup or startup.user_id != user_id:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Startup profile not found."
+        )
+
+    # 2. Read and parse file
+    file_content = await file.read()
+    try:
+        parsed_text = parse_file(file_content, file.filename)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=f"Failed to parse uploaded document: {str(e)}"
+        )
+
+    # 3. Vector-index chunks
+    chunks_count = await index_document(id, file.filename, parsed_text)
+
+    return {
+        "filename": file.filename,
+        "chunks_indexed": chunks_count,
+        "message": "File indexed successfully."
+    }
+

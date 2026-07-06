@@ -21,7 +21,7 @@ class GroqProvider(BaseProvider):
     """Groq LLM API Provider."""
 
     def __init__(self):
-        self.client = Groq(api_key=settings.GROQ_API_KEY)
+        self.client = Groq(api_key=settings.GROQ_API_KEY or "mock_key")
         self.model_name = GROQ_MODEL
 
     async def generate(
