@@ -45,8 +45,8 @@ class Settings(BaseSettings):
 
     # ─── File Upload ──────────────────────────────────────────────────────────
     MAX_FILE_SIZE_MB: int = 10
-    SUPABASE_URL: str
-    SUPABASE_KEY: str
+    SUPABASE_URL: str = ""
+    SUPABASE_KEY: str = ""
 
     @field_validator("ALLOWED_ORIGINS", mode="before")
     @classmethod
@@ -59,6 +59,7 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = True
+        extra = "ignore"
 
 
 # ─── Singleton instance ───────────────────────────────────────────────────────
