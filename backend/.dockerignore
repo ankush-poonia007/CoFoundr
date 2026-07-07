@@ -1,0 +1,30 @@
+# ─── Secrets & Environment Configurations (Secrets must never be baked into Docker images) ───
+.env                       # Private environment variables file
+.env.example               # Environmental template file
+*.env                      # Any other env files
+
+# ─── Virtual Environments & Libraries (Rebuilt inside container using Dockerfile instructions) ───
+.venv/                     # Local virtual environment folder
+env/                       # Alternative virtual environment folder
+venv/                      # Another virtual environment folder
+
+# ─── Python Compile & Runtime Caches (Speeds up image builds by avoiding host caches copy) ───
+__pycache__/               # Python bytecode compilation cache directory
+*.pyc                      # Python compiled bytecode files
+*.pyo                      # Optimized Python bytecode files
+*.pyd                      # Python dynamically linked library files
+
+# ─── Tests & Test Configurations (Not needed for runtime production environments) ───
+tests/                     # Directory containing pytest unit test files
+.pytest_cache/             # Pytest runtime configuration and session caches
+htmlcov/                   # Pytest HTML coverage metric reports
+.coverage                  # Pytest coverage runtime database file
+
+# ─── Documentation & Project Metadata (Not needed to run the app) ───
+*.md                       # Markdown documents (README, ARCHITECTURE, DOCUMENTATION)
+.git/                      # Git repository version history files
+.gitignore                 # Git ignore patterns file
+.dockerignore              # Docker ignore pattern specs
+
+# ─── Local Scripts & Tooling (Only needed for local setups) ───
+scripts/                   # Local development check scripts

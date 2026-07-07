@@ -1,0 +1,30 @@
+# ─── Secrets & Credentials (Secrets must never be baked into Docker images) ───
+.env                       # Private environment variables file
+.env.local                 # Local environment overrides
+.env.production            # Production environment config
+.env.development           # Development environment variables
+.env.example               # Example variables template file
+
+# ─── Dependencies (Rebuilt inside container using npm install to prevent host binary conflicts) ───
+node_modules/              # Local node packages directory
+
+# ─── Next.js Built Artifacts (Rebuilt during compilation inside container) ───
+.next/                     # Next.js build compilation outputs
+out/                       # Next.js static HTML export outputs
+build/                     # General build files
+dist/                      # Transpiled distribution outputs
+.turbo/                    # Turborepo cache outputs
+
+# ─── Tests & Test Configurations (Not needed for runtime production environments) ───
+jest.config.ts             # Jest test runner settings configuration file
+__tests__/                 # Directory containing test suites
+*.test.ts                  # TypeScript unit test files
+*.test.tsx                 # React component test files
+*.spec.ts                  # Specification files
+*.spec.tsx                 # React specification files
+
+# ─── Documentation & Project Metadata (Not needed to run the app) ───
+*.md                       # Markdown documents (README, ARCHITECTURE, DOCUMENTATION)
+.git/                      # Git repository version history files
+.gitignore                 # Git ignore patterns file
+.dockerignore              # Docker ignore pattern specs

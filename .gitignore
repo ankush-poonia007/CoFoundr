@@ -1,62 +1,57 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-ENV/
-build/
-dist/
-*.egg-info/
-.pytest_cache/
-htmlcov/
-.coverage
-.cache/
+# ─── Secrets & Credentials (Prevents leakage of API keys, client secrets, and passwords) ───
+.env                       # Global private variables config
+.env.local                 # Local settings override
+.env.development.local     # Local development override
+.env.test.local            # Local test settings override
+.env.production.local      # Local production variables
+backend/.env               # Backend private variables
+frontend/.env.local        # Frontend private variables
+*.env                      # Any env files containing secret keys
 
-# Node (Next.js)
-node_modules/
-.next/
-out/
-build/
+# ─── Python Runtime & Build Cache (Prevents pushing local interpreters and Python runtime artifacts) ───
+__pycache__/               # Python bytecode compilation cache
+*.pyc                      # Python compiled bytecode files
+*.pyo                      # Optimized Python bytecode files
+*.pyd                      # Python dynamically linked library files
+.Python                    # Standard Python interpreter metadata
+env/                       # Local virtual environment folder
+venv/                      # Alternative virtual environment folder
+.venv/                     # Standard poetry/pipenv virtual environment
+ENV/                       # Virtualenv root folders
 
-# Secret Files
-.env
-.env.local
-.env.production
-.env.development
-backend/.env
-frontend/.env.local
-*.env
-.env.development.local
-.env.test.local
-.env.production.local
-.env*.local
+# ─── Test Coverage & Pytest Caches (Prevents test results and runtime metadata tracking) ───
+.pytest_cache/             # Pytest runtime configuration and session cache
+htmlcov/                   # Pytest HTML coverage metric reports
+.coverage                  # Pytest coverage runtime database file
+.cache/                    # Generic command cache metrics
 
-# Database Data Volumes
-postgres_data/
-chroma_data/
-*.sqlite3
-*.db
-*.sqlite
+# ─── Frontend Build & Dependency Artifacts (Prevents node modules and built bundles tracking) ───
+node_modules/              # Local node packages directory (rebuilt on npm install)
+.next/                     # Next.js build compilation outputs
+out/                       # Next.js static HTML export outputs
+build/                     # General build files
+dist/                      # Transpiled distribution outputs
+.turbo/                    # Turborepo cache outputs
 
-# IDE & Editor Configs
-.vscode/
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.swp
-.project
-.pydevproject
+# ─── Database Volumes & Local Files (Prevents raw database binaries and sqlite databases tracking) ───
+postgres_data/             # Local PostgreSQL Docker volume storage folder
+chroma_data/               # Local ChromaDB Docker volume storage folder
+*.sqlite3                  # SQLite3 database files
+*.db                       # General database dumps
+*.sqlite                   # SQLite database files
 
-# Operating System Files
-.DS_Store
-Thumbs.db
-ehthumbs.db
+# ─── IDE & Text Editor Configuration (Prevents local project workspace settings overrides) ───
+.vscode/                   # VS Code workspace settings, extensions, and tasks configs
+.idea/                     # IntelliJ/PyCharm workspace settings files
+*.suo                      # Visual Studio User Options file
+*.ntvs*                    # Visual Studio Node.js Tools files
+*.njsproj                  # Visual Studio Node.js project files
+*.sln                      # Visual Studio solution files
+*.swp                      # Vim temporary swap files
+.project                   # Eclipse project configuration file
+.pydevproject              # Eclipse PyDev project file
 
-# Documentation Roadmaps
-cofoundr_roadmap.md
+# ─── Operating System Metadata (Prevents OS specific thumbnail database caches) ───
+.DS_Store                  # macOS Finder folder custom options files
+Thumbs.db                  # Windows Explorer folder thumbnail caches
+ehthumbs.db                # Windows Media Center thumbnail caches
